@@ -7,12 +7,12 @@ A simple text summarization web application with a Streamlit frontend and FastAP
 - 📝 Simple and minimal UI design
 - 🚀 FastAPI backend for API handling
 - 🎨 Streamlit frontend for user interaction
-- 🤖 AI-powered text summarization using OpenAI API
+- 🤖 AI-powered text summarization using Groq API
 
 ## Prerequisites
 
 - Python 3.8+
-- CHATBOT_API_KEY environment variable set with your OpenAI API key
+- GROQ_API_KEY environment variable set with your Groq API key
 
 ## Installation
 
@@ -58,4 +58,4 @@ The frontend will open in your browser at `http://localhost:8501`
 
 ## Environment Variables
 
-- `CHATBOT_API_KEY` - Your OpenAI API key (must be set in system environment variables)
+- `GROQ_API_KEY` - Your Groq API key (must be set in system environment variables or .env file)
