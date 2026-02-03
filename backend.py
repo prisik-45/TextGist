@@ -26,9 +26,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-API_KEY = os.getenv("CHATBOT_API_KEY")
+API_KEY = os.getenv("GROQ_API_KEY")
 if not API_KEY:
-    raise ValueError("API_KEY environment variable not set.")
+    raise ValueError("GROQ_API_KEY environment variable not set.")
 
 def read_docx(file):
     document = Document(file)
@@ -99,18 +99,16 @@ async def summarize_text(
         headers = {
             "Authorization": f"Bearer {API_KEY}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://textgist.vercel.app",
-            "X-Title": "TextGist Summarizer",
         }
         payload = {
-            "model": "meta-llama/llama-3.3-8b-instruct:free",
+            "model": "llama-3.3-70b-versatile",
             "messages": [
                 {"role": "system", "content": f"You are a helpful text summarization assistant. {length_prompt}"},
                 {"role": "user", "content": f"Summarize the following text:\n\n{processed_text}"}
             ],
             "stream": False,
         }
-        resp = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=payload, timeout=60)
+        resp = requests.post("https://api.groq.com/openai/v1/chat/completions", headers=headers, json=payload, timeout=60)
         resp.raise_for_status()
         data = resp.json()
         summary = data["choices"][0]["message"]["content"]
